@@ -49,9 +49,9 @@
 
 import express from "express";
 import mongoose from "mongoose";
-import booksRouter from './routes/bookRoutes.js';
-import cors from 'cors';
-import 'dotenv/config';
+import booksRouter from "./routes/bookRoutes.js";
+import cors from "cors";
+import "dotenv/config";
 
 const PORT = process.env.PORT || 3000;
 const mongoDBUrl = process.env.mongoDBUrl;
@@ -59,19 +59,24 @@ const mongoDBUrl = process.env.mongoDBUrl;
 const app = express();
 
 // Middleware to enable CORS
-app.use(cors({
-  origin: 'http://localhost:5173', // Allow requests from this origin
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-  allowedHeaders: ['Content-Type'], // Allowed headers
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://book-store-backend-phi-red.vercel.app",
+    ], // Allow requests from this origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    allowedHeaders: ["Content-Type"], // Allowed headers
+  })
+);
 
 // Middleware to parse JSON
 app.use(express.json());
 
-app.use('/books', booksRouter);
+app.use("/books", booksRouter);
 
 // Enable preflight for all routes
-app.options('*', cors());
+app.options("*", cors());
 
 // Connection with the database
 mongoose
