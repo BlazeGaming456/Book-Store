@@ -49,9 +49,12 @@
 
 import express from "express";
 import mongoose from "mongoose";
-import { PORT, mongoDBUrl } from "./config.js";
 import booksRouter from './routes/bookRoutes.js';
 import cors from 'cors';
+import 'dotenv/config';
+
+const PORT = process.env.PORT || 3000;
+const mongoDBUrl = process.env.mongoDBUrl;
 
 const app = express();
 

@@ -5,6 +5,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Createbook = () => {
   const [title,setTitle] = useState('');
   const [author,setAuthor] = useState('');
@@ -17,7 +19,7 @@ const Createbook = () => {
       title,author,publishYear,
     };
     setLoading(true);
-    axios.post('http://localhost:3000/books',data).then(()=>{
+    axios.post(`${BACKEND_URL}/books`,data).then(()=>{
       setLoading(false);
       enqueueSnackbar('Book Created Successfully', {variant: 'success'})
       navigate('/');

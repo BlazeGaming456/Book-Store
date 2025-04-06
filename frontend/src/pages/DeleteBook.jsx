@@ -5,6 +5,8 @@ import axios from 'axios'
 import {useNavigate,useParams} from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const DeleteBook = () => {
   const [loading,setLoading] = useState(false);
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ const DeleteBook = () => {
   const {enqueueSnackbar} = useSnackbar();
   const handleDeleteBook = ()=>{
     setLoading(true);
-    axios.delete(`http://localhost:3000/books/${id}`).then(()=>{
+    axios.delete(`${BACKEND_URL}/books/${id}`).then(()=>{
       setLoading(false);
       enqueueSnackbar('Book Deleted Successfully', {variant: 'success'})
       navigate('/');

@@ -8,13 +8,15 @@ import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
 import BooksTable from '../components/home/BooksTable.jsx'
 import BooksCard from '../components/home/BooksCard.jsx'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
   useEffect(()=> {
     setLoading(true);
-    axios.get('http://localhost:3000/books').then((response)=> {
+    axios.get(`${BACKEND_URL}/books`).then((response)=> {
       setBooks(response.data.data);
       setLoading(false);
     }).catch((error)=>{

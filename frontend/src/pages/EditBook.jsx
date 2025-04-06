@@ -5,6 +5,8 @@ import axios from 'axios'
 import { useNavigate,useParams } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Editbook = () => {
   const [title,setTitle] = useState('');
   const [author,setAuthor] = useState('');
@@ -32,7 +34,7 @@ const Editbook = () => {
       title,author,publishYear,
     };
     setLoading(true);
-    axios.put(`http://localhost:3000/books/${id}`,data).then(()=>{
+    axios.put(`${BACKEND_URL}/books/${id}`,data).then(()=>{
       setLoading(false);
       navigate('/');
       enqueueSnackbar('Book Edited Successfully', {variant: 'success'});
