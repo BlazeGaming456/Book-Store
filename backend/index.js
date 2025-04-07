@@ -58,25 +58,28 @@ const mongoDBUrl = process.env.mongoDBUrl;
 
 const app = express();
 
+app.use(cors());
+
 // Middleware to enable CORS
-app.use(
-  cors({
+const corsOptions = {
     origin: [
       "http://localhost:5173",
-      "https://book-store-backend-phi-red.vercel.app",
+      "https://book-store-frontend-gold.vercel.app/",
     ], // Allow requests from this origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
     allowedHeaders: ["Content-Type"], // Allowed headers
-  })
-);
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 // Middleware to parse JSON
 app.use(express.json());
 
 app.use("/books", booksRouter);
-
-// Enable preflight for all routes
-app.options("*", cors());
 
 // Connection with the database
 mongoose
