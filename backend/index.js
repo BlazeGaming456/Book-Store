@@ -14,7 +14,8 @@ const corsOptions = {
   origin: [
     "http://localhost:5173",
     "https://book-store-frontend-gold.vercel.app",
-    "https://book-store-frontend-3sfd9d49w-blazegaming456s-projects.vercel.app/" // Removed trailing slash
+    "https://book-store-frontend-3sfd9d49w-blazegaming456s-projects.vercel.app/",
+    "https://book-store-frontend-teal.vercel.app/" // Removed trailing slash
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Added OPTIONS
   allowedHeaders: ["Content-Type", "Authorization"], // Added common headers
