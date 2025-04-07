@@ -14,13 +14,34 @@ const corsOptions = {
   origin: [
     "http://localhost:5173",
     "https://book-store-frontend-gold.vercel.app",
-    "https://book-store-frontend-3sfd9d49w-blazegaming456s-projects.vercel.app/",
-    "https://book-store-frontend-teal.vercel.app/" // Removed trailing slash
+    "https://book-store-frontend-3sfd9d49w-blazegaming456s-projects.vercel.app",
+    "https://book-store-frontend-teal.vercel.app" // Removed trailing slash
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Added OPTIONS
   allowedHeaders: ["Content-Type", "Authorization"], // Added common headers
   credentials: true // If you're using cookies/auth
 };
+
+// Add headers before the routes are defined
+app.use(function (req, res, next) {
+  // Allow from all vercel frontend domains
+  const allowedOrigins = [
+    'https://book-store-frontend-teal.vercel.app',
+    'https://book-store-frontend-gold.vercel.app',
+    'http://localhost:5173'
+  ];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  
+  next();
+});
 
 // Apply CORS middleware once with options
 app.use(cors(corsOptions));

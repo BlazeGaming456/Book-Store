@@ -1,20 +1,21 @@
 {
-  "version": 2,
-  "builds": [
+    "headers": [
       {
-          "src": "index.js",
-          "use": "@vercel/node",
-          "config": {
-              "includeFiles": [
-                  "dist/**"
-              ]
+        "source": "/(.*)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,POST,PUT,DELETE,OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Authorization"
           }
+        ]
       }
-  ],
-  "routes": [
-      {
-          "src": "/(.*)",
-          "dest": "index.js"
-      }
-  ]
-}
+    ]
+  }
